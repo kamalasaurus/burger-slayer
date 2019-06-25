@@ -8,12 +8,12 @@
     v1.setAttribute('src', '/data_dst.mp4');
     v1.setAttribute('loop', true);
     v1.setAttribute('width', '1px');
-    v1.setAttribute('style', 'display: inline-block; transform: rotate(90deg);');
+    v1.setAttribute('style', 'display: inline-block;');
   const v2 = document.createElement('video');
     v2.setAttribute('src', '/data_src.mp4');
     v2.setAttribute('loop', true);
     v2.setAttribute('width', '1px');
-    v2.setAttribute('style', 'display: inline-block; transform: rotate(90deg);');
+    v2.setAttribute('style', 'display: inline-block;');
 
   const canvas = document.createElement('canvas');
     canvas.setAttribute('style', `
@@ -142,6 +142,14 @@
       victory.appendChild(v2);
       const txt = document.createElement('span');
         txt.innerHTML = 'They\'re free!  Yayy'
+
+      const reset = document.createElement('div');
+        reset.addEventListener('click', () => {
+          HP = 10000;
+          window.requestAnimationFrame(frame);
+        });
+        reset.setAttribute('style', 'background-color: yellow; width: 250px; height: 250px;');
+        reset.innerHTML = 'reset';
       victory.appendChild(txt);
       document.body.appendChild(victory);
     } else {
