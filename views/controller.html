@@ -21,9 +21,17 @@
     <!--</script>-->
     <script>
       const socket = io.connect();
-      document.body.addEventListener('click', () => {
+      const action = () => {
+        document.body.setAttribute('style',
+          `background-color: rgb(
+            ${Math.round(255*Math.random())},
+            ${Math.round(255*Math.random())},
+            ${Math.round(255*Math.random())});`
+        );
         socket.emit('throw_burger', 'clicked!');
-      });
+      };
+      document.body.addEventListener('click', action);
+      document.body.addEventListener('touchstart', action);
     </script>
   </body>
 </html>
