@@ -11,6 +11,9 @@
       height: 100%;
     `);
 
+  const img = document.createElement('img');
+    img.setAttribute('src', './transburger.png');
+
   document.body.appendChild(canvas);
 
   const ctx = canvas.getContext('2d');
@@ -40,63 +43,25 @@
     ctx.fill();
   };
 
-  const drawShip = ({x, y, angle, fill, points}) => {
-    let rotated = points.map((ma) => rotate(ma, angle))
-    ctx.fillStyle = fill;
-    ctx.beginPath();
-    ctx.moveTo(x, y);
-    rotated.forEach(({x2, y2}) => ctx.lineTo(x + x2, y + y2));
-    ctx.closePath();
-    ctx.fill();
+  const burger = function() {
+    return {
+      width: 383,
+      height: 334,
+      x: (width - 383) / 2,
+      y: (height - 334) / 2,
+      z: 1,
+      timeStart: 0,
+      time: 0
+    };
   };
 
-  const ship = {
-    x: width/2,
-    y: height/2,
-    angle: -Math.PI/2,
-    fill: 'yellow',
-    points: [
-      {m: Math.sqrt(2) * 5, a: -(3/4) * Math.PI},
-      {m: 8, a: 0},
-      {m: Math.sqrt(2) * 5, a: (3/4) * Math.PI}
-    ]
-  };
+  let burgers = [];
 
-
-  const keysPressed = {};
+  const throwBurger = () => burgers.push(new burger());
 
   const keyPress = (e) => {
     e.preventDefault();
-    const keyMap = {
-      'a': 'turnLeft',
-      'ArrowLeft': 'turnLeft',
-      'd': 'turnRight',
-      'ArrowRight': 'turnRight',
-      'w': 'moveUp',
-      'ArrowUp': 'moveUp',
-      ' ': 'shoot'
-    };
-
-    if (keyMap[e.key]) keysPressed[keyMap[e.key]] = (e.type === 'keydown');
-  };
-
-  const moveShip = function(ship) {
-    const actions = {
-      turnLeft: () => { ship.angle -= 0.15; },
-      turnRight: () => { ship.angle += 0.15; },
-      moveUp: () => {
-        ship.x = modx(ship.x + 5 * Math.cos(ship.angle));
-        ship.y = mody(ship.y + 5 * Math.sin(ship.angle));
-      },
-      shoot: () => { shots.push(shot); }
-    };
-
-    Object
-      .keys(keysPressed)
-      .forEach(action => {
-        if (keysPressed[action] && actions[action])
-          actions[action]()
-      });
+    if (e.key === ' ') throwBurger();
   };
 
   const resize = (e) => {
@@ -110,21 +75,34 @@
   };
 
   document.body.addEventListener('keydown', keyPress);
-  document.body.addEventListener('keyup', keyPress);
   window.addEventListener('resize', resize);
 
   const frame = (timestep) => {
     ctx.clearRect(0, 0, width, height);
     background();
     ctx.drawImage(video, vidX, 0, vidW, height);
-    moveShip(ship)
-    drawShip(ship);
+    burgers.forEach((burger) => {
+      if (burger.timeStart === 0) burger.timeStart = timestep;
+      burger.time = timestep;
+      burger.y = burger.y + 0.5 * Math.pow(((burger.time - burger.timeStart) / 1000), 2);
+      burger.z += 20;
+      burger.width = burger.width * Math.atan(burger.width / burger.z) / (Math.PI/2);
+      burger.height = burger.height * Math.atan(burger.height / burger.z) / (Math.PI/2);
+      burger.x = (width - burger.width) / 2;
+      if (burger.z < 1000)
+        ctx.drawImage(img, burger.x, burger.y, burger.width, burger.height);
+    });
+    burgers = burgers.filter((burger) => burger.z < 1000);
     window.requestAnimationFrame(frame);
-  }
+  };
 
-  resize()
-  frame()
+  video.addEventListener('play', () => {
+    resize()
+    frame()
+  });
 
-  //const peer = new Peer('burger-beast');
+  window.throwBurger = throwBurger;
+
+  const peer = new Peer('burger-beast');
 
 })();

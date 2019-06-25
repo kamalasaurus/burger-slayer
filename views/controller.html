@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+  <head>
+    <title>burger-slayer</title>
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <script src="./peerjs.min.js"></script>
+    <script>
+      const peer = new Peer('controller' + Math.floor(10 * Math.random()));
+
+      document.body.addEventListner('click', window.throwBurger);
+    </script>
+  </body>
+</html>
