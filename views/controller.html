@@ -5,17 +5,24 @@
     <link rel="stylesheet" href="./style.css">
   </head>
   <body>
-    <script src="./peerjs.min.js"></script>
+    <script src="./socket.io/socket.io.js"></script>
+    <!--<script src="./peerjs.min.js"></script>-->
+    <!--<script>-->
+      <!--const peer = new Peer({-->
+        <!--host: location.hostname,-->
+        <!--port: location.port || (location.protocol === 'https:' ? 443 : 80),-->
+        <!--path: '/peerjs'-->
+      <!--});-->
+      <!--const conn = peer.connect('burger-beast');-->
+      <!--conn.on('open', () => { console.log('connection established'); });-->
+      <!--document.body.addEventListener('click', () => {-->
+        <!--conn.send('clicked!');-->
+      <!--});-->
+    <!--</script>-->
     <script>
-      const peer = new Peer({
-        host: location.hostname,
-        port: location.port || (location.protocol === 'https:' ? 443 : 80),
-        path: '/peerjs'
-      });
-      const conn = peer.connect('burger-beast');
-      conn.on('open', () => { console.log('connection established'); });
+      const socket = io.connect();
       document.body.addEventListener('click', () => {
-        conn.send('clicked!');
+        socket.emit('throw_burger', 'clicked!');
       });
     </script>
   </body>

@@ -154,16 +154,23 @@
     frame();
   });
 
-  const peer = new Peer('burger-beast', {
-    host: location.hostname,
-    port: location.port || (location.protocol === 'https:' ? 443 : 80),
-    path: '/peerjs'
-  });
+  //const peer = new Peer('burger-beast', {
+    //host: location.hostname,
+    //port: location.port || (location.protocol === 'https:' ? 443 : 80),
+    //path: '/peerjs'
+  //});
 
-  peer.on('connection', function(conn) {
-    conn.on('data', function(data) {
-      throwBurger();
-    });
+  //peer.on('connection', function(conn) {
+    //conn.on('data', function(data) {
+      //throwBurger();
+    //});
+  //});
+  //
+
+  const socket = io.connect();
+
+  socket.on('throw_burger', function() {
+    throwBurger();
   });
 
 })();
