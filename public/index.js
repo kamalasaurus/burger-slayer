@@ -35,6 +35,12 @@
 
   document.body.appendChild(help);
 
+  const qr = document.createElement('img');
+    qr.setAttribute('src', './frame.png');
+    qr.setAttribute('style', 'position: absolute; right: 100px; top: 200px;');
+
+  document.body.appendChild(qr);
+
   const ctx = canvas.getContext('2d');
   let width = document.body.offsetWidth;
   let height = document.body.offsetHeight;
