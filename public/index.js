@@ -146,11 +146,17 @@
       const reset = document.createElement('div');
         reset.addEventListener('click', () => {
           HP = 10000;
+          v1.setAttribute('width', '1px');
+          v2.setAttribute('width', '1px');
+          document.body.appendChild(v1);
+          document.body.appendChild(v2);
+          victory.remove();
           window.requestAnimationFrame(frame);
         });
         reset.setAttribute('style', 'background-color: yellow; width: 250px; height: 250px;');
         reset.innerHTML = 'reset';
       victory.appendChild(txt);
+      victory.appendChild(reset);
       document.body.appendChild(victory);
     } else {
       window.requestAnimationFrame(frame);
