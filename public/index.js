@@ -137,7 +137,7 @@
       v1.setAttribute('width', '400px');
       v2.setAttribute('width', '400px');
       const victory = document.createElement('div');
-        victory.setAttribute('style', 'position: absolute; text-align: center; top: 200px; background-color: steelblue; margin: 0 auto; padding: 100px;')
+        victory.setAttribute('style', 'font-family: monospace; position: absolute; text-align: center; top: 200px; background-color: steelblue; margin: 0 auto; padding: 100px;')
       victory.appendChild(v1);
       victory.appendChild(v2);
       const txt = document.createElement('span');
