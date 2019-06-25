@@ -22,5 +22,5 @@ server.listen(9000);
 
 peerserver.on('connection', function(id) {
   console.log(id);
-})
+});
 
