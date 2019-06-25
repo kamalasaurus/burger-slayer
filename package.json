@@ -1,0 +1,17 @@
+{
+  "name": "burger-slayer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "peer": "^0.2.10",
+    "peerjs": "^1.0.0"
+  }
+}
