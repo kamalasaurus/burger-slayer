@@ -33,7 +33,12 @@
     help.innerHTML = "help!  Chris and Vivian were fused together in a horrible ITP deepfake lab accident!  Feed them burgers to set them freee";
     help.setAttribute('style', 'font-family: monospace; background-color: gray; color: white; position: absolute; top: 20px; left: 10px; width: 400px;');
 
+  const directions = document.createElement('div');
+    directions.innerHTML = "click screen to start game if the screen is white, scan the QR code with your phone and tap the phone screen to throw burgers";
+    directions.setAttribute('style', 'font-family: monospace; background-color: magenta; color: white; position: absolute; top: 150px; left: 10px; width: 400px;');
+
   document.body.appendChild(help);
+  document.body.appendChild(directions);
 
   const qr = document.createElement('img');
     qr.setAttribute('src', './frame.png');
